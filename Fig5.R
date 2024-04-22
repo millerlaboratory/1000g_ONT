@@ -1,9 +1,8 @@
 library(dplyr)
 library(readr)
 library(ggplot2)
-library(ggbreak)
-library(patchwork)
 library(tidyr)
+
 
 
 #Sophia Gibson
@@ -378,4 +377,125 @@ library(svglite)
 svglite(file = "fig5_ATXN10_alleles.svg", width = 8, height = 2)
 print(ATXN10_alleles)
 dev.off()
+
+
+
+#Expansion Hunter results which are added in Illustrator
+
+
+STRchive_EH_loci_id <- read_delim("/Volumes/172.23.192.137/users/sgibson/Projects/1KGP-ONT/1000g_preprint/EH_STR/STRchive_EH_loci_id.bed", 
+                                  delim = "\t", escape_double = FALSE, 
+                                  col_names = FALSE, trim_ws = TRUE)
+
+
+header <- c("chr", "start", "end", "format", "strchive_chr", "strchive_start", "strchive_end", "id")
+
+
+names(STRchive_EH_loci_id) <- header
+
+
+format <- STRchive_EH_loci_id %>%
+  tidyr::separate_rows(format, sep = ",") %>%
+  tidyr::separate(format, into = c("sample", "REPCN", "REPCI"), sep="=") %>%
+  tidyr::drop_na() 
+
+format$sample <- substr(format$sample, start = 1, stop = 7)
+
+
+plot <- format %>%
+  dplyr::mutate(hp = "hp1/hp2") %>%
+  tidyr::separate_rows(REPCN,REPCI,hp, sep = "/")
+
+RFC1 <- plot %>%
+  dplyr::filter(id == "CANVAS_RFC1") %>%
+  dplyr::filter(sample == "HG02409" | sample == "HG00105" | sample == "HG01122" | sample == "HG00331" | sample == "HG01862")
+
+
+RFC1$sample <- factor(RFC1$sample, levels = c("HG01862", "HG00331", "HG01122", "HG00105", "HG02409"))
+
+RFC1$REPCN <- as.numeric(RFC1$REPCN)
+
+
+ci <- RFC1 %>%
+  tidyr::separate(REPCI, into = c("low","high"), sep = "-")
+
+ci$sample_allele <- paste(ci$sample, ci$hp, sep = "_")
+
+
+ci$high <- as.numeric(ci$high)
+
+ci$low <- as.numeric(ci$low)
+
+ci$REPCN <- as.numeric(ci$REPCN)
+
+
+RCF1_plot <- ggplot(ci, aes(x=sample, y=REPCN, fill=hp)) +
+  geom_bar(stat="identity", position=position_dodge()) +
+  geom_errorbar(aes(ymin=low, ymax=high), position = position_dodge2(width = 0.2)) +
+  scale_fill_brewer(palette="Accent") +
+  coord_flip() +
+  theme_light() +
+  theme(axis.title = element_blank())
+
+library(svglite)
+
+svglite(file = "Fig5_RFC1_EH_CI.svg", width = 7, height = 4)
+print(RFC1_plot)
+dev.off()
+
+
+
+
+
+ATXN10 <- plot %>%
+  dplyr::filter(id == "SCA10_ATXN10") %>%
+  dplyr::filter(sample == "HG01122" | sample == "HG02252" | sample == "HG02345")
+
+
+ATXN10$sample <- factor(ATXN10$sample, levels = c("HG02345", "HG02252", "HG01122"))
+
+ATXN10$REPCN <- as.numeric(ATXN10$REPCN)
+
+
+
+ci_A <- ATXN10 %>%
+  tidyr::separate(REPCI, into = c("low","high"), sep = "-")
+
+ci_A$high <- as.numeric(ci_A$high)
+
+ci_A$low <- as.numeric(ci_A$low)
+
+ci_A$sample_allele <- paste(ci_A$sample, ci_A$hp, sep = "_")
+
+
+ATXN10_plot <- ggplot(ci_A, aes(x=sample, y=REPCN, fill=hp)) +
+  geom_bar(stat="identity", position=position_dodge()) +
+  geom_errorbar(aes(ymin=low, ymax=high), position = position_dodge2(width = 0.2)) +
+  scale_fill_brewer(palette="Accent") +
+  coord_flip() +
+  theme_light() +
+  theme(axis.title = element_blank())
+
+library(svglite)
+
+svglite(file = "Fig5_ATXN10_EH_CI.svg", width = 7, height = 3)
+print(ATXN10_plot)
+dev.off()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
