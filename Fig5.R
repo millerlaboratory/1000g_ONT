@@ -6,11 +6,10 @@ library(patchwork)
 library(tidyr)
 
 
-``````````````````````````````
-Sophia Gibson
-04/22/2024
-Final Repeat Plot
-``````````````````````````````
+#Sophia Gibson
+#04/22/2024
+#Final Repeat Plot
+
 
 #Read in data, format
 
