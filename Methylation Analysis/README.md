@@ -9,4 +9,4 @@ Scripts and supplemental bed files for performing analysis
 **Part Three: Phased Autosomal DMR analysis**
 
 
-**Parth 4: MeOW and Downstream Analysis**
+**Part Four: MeOW and Downstream Analysis**
