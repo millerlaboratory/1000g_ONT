@@ -18,7 +18,7 @@ The python script **count.py** counts the motif number at each locus and combine
 
 An example bash wrapper can be found too (**count_wrapper.sh**)
 
-Disease-associated loci can be filtered like the method in **filter_STR.sh**
+Disease-associated loci can be filtered like the method in **filter_STR.sh** This bed file is in the supplemental tables.
 
 **Part Four: Analysis and plots**
 
