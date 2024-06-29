@@ -2,9 +2,9 @@
 
 #For manuscript analysis, filter sample_allele vcfs for disease loci
 
-VCF_DIR=/n/users/sgibson/Projects/1KGP-ONT/1000g_preprint/all_simple_repeats/vamos_sr_vcf_original
-BED=/n/users/sgibson/Projects/1KGP-ONT/1000g_preprint/all_simple_repeats/STR-disease-loci.processed_revised.bed
-OUT_DIR=/n/users/sgibson/Projects/1KGP-ONT/20240422_Revision_Scripts/filtered_vcf/
+VCF_DIR=$1
+BED=STR-disease-loci.processed_revised.bed
+OUT_DIR=$2
 
 module load bedtools/2.30.0
 
