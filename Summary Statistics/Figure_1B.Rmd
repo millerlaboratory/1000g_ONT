@@ -1,0 +1,29 @@
+---
+title: "Figure_1B"
+output: html_document
+date: "2024-06-27"
+---
+
+```{r}
+library(ggplot2)
+library(rlang)
+```
+
+```{r}
+Figure_1B_data.txt <- read.delim("Figure_1B_data.txt")
+```
+
+```{r}
+
+subplots = c("Mean_length_cramino", "N50_cramino", "Est_depth_cramino")
+
+for (var in subplots) {
+
+Figure_1b = ggplot(Figure_1B_data.txt)  + 
+   geom_violin(aes(x="Values", y=!!sym(var))) + geom_boxplot(aes(x = "Values", y=!!sym(var)))
+Figure_1b
+
+print (Figure_1b)
+
+}
+```

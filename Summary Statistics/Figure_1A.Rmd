@@ -1,0 +1,26 @@
+---
+title: "Figure_1A"
+output: html_document
+date: "2024-06-27"
+---
+
+```{r}
+library(ggplot2)
+```
+
+```{r}
+ancestry_colors_sex=c('AFR_XX'='#F1C40F', 'AFR_XY'='#F1C40F90', 'EUR_XX'='#5DADE2', 'EUR_XY'='#5DADE290', 'SAS_XX'='#9B59B6', 'SAS_XY'='#9B59B690', 'AMR_XX'='#B01E3A', 'AMR_XY'='#B01E3A90', 'EAS_XX'='#52BE80', 'EAS_XY'='#52BE8090')
+```
+
+```{r}
+Figure_1A_data.txt <- read.delim("Figure_1A_data.txt")
+```
+
+```{r}
+Figure_1A = ggplot(Figure_1A_data.txt) +  
+  geom_bar(aes(x = Ancestry, fill = Ancestry_Sex), position = "stack") + 
+  scale_fill_manual(values = ancestry_colors_sex) +
+  coord_flip() + 
+  xlim(c("AFR", "SAS", "EAS", "AMR", "EUR"))
+Figure_1A
+```
