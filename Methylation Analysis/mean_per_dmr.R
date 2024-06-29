@@ -5,7 +5,6 @@ library(tidyr)
 
 #Read in data
 
-setwd("/Volumes/172.23.192.137/users/sgibson/1000g_preprint/methylation/pileup_files")
 
 # List all the files with a specific file extension (e.g., .csv)
 file_names <- list.files(pattern = "\\.bed$")
