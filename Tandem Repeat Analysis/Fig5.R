@@ -12,12 +12,11 @@ library(tidyr)
 
 #Read in data, format
 
-setwd("/Volumes/172.23.192.137/users/sgibson/Projects/1KGP-ONT/20240422_Revision_Scripts/")
 
 
-data <- read.delim2("/Volumes/172.23.192.137/users/sgibson/Projects/1KGP-ONT/20240422_Revision_Scripts/count/first100_strchive_count.tsv")
+data <- read.delim2("first100_strchive_count.tsv")
 
-metadata <- read.csv("/Volumes/172.23.192.137/users/sgibson/Projects/1KGP-ONT/1000g_preprint/STRchive/STR-disease-loci.processed.csv")
+metadata <- read.csv("STR-disease-loci.processed.csv")
 
 
 metadata_format <- metadata %>%
