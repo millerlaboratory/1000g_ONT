@@ -3,7 +3,7 @@
 
 WORKING_DIR=$1
 #RScript=$2
-Reference_bed=/n/users/sgibson/reference/chrX_cpgIslands.hg38_NUM_FOR_INTERSECT.bed #Some error submitting from the script submit
+Reference_bed=chrX_cpgIslands.hg38_NUM_FOR_INTERSECT.bed #Some error submitting from the script submit
 
 cd $WORKING_DIR
 
