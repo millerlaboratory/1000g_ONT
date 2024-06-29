@@ -1,8 +1,8 @@
 #!/bin/bash
 
-INPUT_DIR=/n/1000g/align-card-2.24-hg38/FIRST_100/
-OUTPUT=/n/users/sgibson/Projects/1KGP-ONT/20240422_Revision/REVISED_S2/vamos_original_vcf
-MOTIFS=/n/users/sgibson/Projects/1KGP-ONT/20240422_Revision/REVISED_S2/original_motifs.set148_GIAB_SV_Tier1_liftover_grch38_simple_STRchive_sorted_ARfix.bed
+INPUT_DIR=$1
+OUTPUT=$2
+MOTIFS=original_motifs.set148_GIAB_SV_Tier1_liftover_grch38_simple_STRchive_sorted_ARfix.bed
 
 cd $OUTPUT
 
