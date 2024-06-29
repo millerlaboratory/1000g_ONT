@@ -23,4 +23,4 @@ Disease-associated loci can be filtered like the method in **filter_STR.sh** Thi
 
 **Part Four: Analysis and plots**
 
-The tsv can be analysed in R or Python. Figures from the paper are in Fig5.R
+The tsv can be analysed in R or Python. Expansion hunter data can also be found in this repository. Figures from the paper are in Fig5.R
