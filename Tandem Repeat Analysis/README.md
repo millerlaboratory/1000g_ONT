@@ -3,6 +3,7 @@ These are scripts for performing the tandem repeat analysis
 **Part One Assembling the bed file for geneotyping**
 
 See the shell script  for how the loci genotyped were selected, the original motif set can be found here: https://zenodo.org/records/835736
+The file is also included.
 
 
 **Part Two: Run Vamos**
