@@ -26,7 +26,7 @@ metadata_format <- metadata %>%
   tidyr::unite(vntr, place, stop_hg38, sep="-")
 
 
-motif <- read.delim("/Volumes/172.23.192.137/users/sgibson/Projects/1KGP-ONT/1000g_preprint/all_simple_repeats/STR-disease-loci.processed_revised.bed", header=FALSE) %>%
+motif <- read.delim("STR-disease-loci.processed_revised.bed", header=FALSE) %>%
   tidyr::unite(place, V1, V2, sep=":") %>%
   tidyr::unite(vntr, place, V3, sep="-") %>%
   dplyr::rename(motifs = V4) %>%
@@ -382,7 +382,7 @@ dev.off()
 #Expansion Hunter results which are added in Illustrator
 
 
-STRchive_EH_loci_id <- read_delim("/Volumes/172.23.192.137/users/sgibson/Projects/1KGP-ONT/1000g_preprint/EH_STR/STRchive_EH_loci_id.bed", 
+STRchive_EH_loci_id <- read_delim("STRchive_EH_loci_id.bed", 
                                   delim = "\t", escape_double = FALSE, 
                                   col_names = FALSE, trim_ws = TRUE)
 
