@@ -1,0 +1,37 @@
+---
+title: "Figure_S2"
+output: html_document
+date: "2024-06-27"
+---
+
+```{r}
+library(ggplot2)
+library(rlang)
+library(dplyr)
+```
+
+```{r}
+Figure_S2_data.txt <- read.delim("Figure_S2_data.txt")
+```
+
+```{r}
+CALLER <- c("clair3", "PMDV")
+MASK <- c("HG002_hiconf", "HG002_hiconf_HP", "none")
+
+for (mask in MASK) {
+  for (caller in CALLER) {
+    subset_data <- Figure_S2_data.txt %>%
+      filter(mask == !!mask, query == !!caller)
+    
+    Figure_S2 <- ggplot(subset_data, aes(x = p_r_f1, y = value, fill = snv_indel)) +
+      xlim(c("precision", "recall", "f1")) +
+      geom_violin(position = position_dodge(0)) +
+      ggtitle(paste("Mask:", mask, "Caller:", caller)) +
+      theme_minimal()
+    
+print(Figure_S2)
+    
+  }
+}
+
+```

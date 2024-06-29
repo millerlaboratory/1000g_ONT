@@ -1,0 +1,36 @@
+---
+title: "Figure_S1"
+output: html_document
+date: "2024-06-27"
+---
+
+```{r}
+library(ggplot2)
+library(rlang)
+library(dplyr)
+```
+
+```{r}
+Figure_S1_data.txt <- read.delim("Figure_S1_data.txt")
+```
+
+```{r}
+
+TRUTH = c("GIAB", "HPRC")
+QUERY = c("clair3", "PMDV", "GATK")
+MASK = c("GIAB_HG002_HP", "GIAB_HG002")
+SNV_INDEL = c("snc", "indel")
+
+for (truth in TRUTH) {
+  for (query in QUERY) {
+    for (snv_indel in SNV_INDEL) {
+    subset_data <- Figure_S1_data.txt %>%
+      filter(snv_indel == !!snv_indel, truth == !!truth, query == !!caller)
+
+Figure_S1 = ggplot(subset_data, aes(x=sample_ID, y=value, color=mask, shape=metric)) + geom_point()
+
+print(Figure_S1)
+    }
+  }
+}
+```
