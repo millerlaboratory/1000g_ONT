@@ -2,10 +2,10 @@
 
 #Script for running the bedtools interect and quantification script on each 1000g sample
 
-script=/n/users/sgibson/github_repo/quant_methylation/1000G_ONT_WORKFLOW/1000g_modkit_intersect.sh
-RScript=/n/users/sgibson/github_repo/quant_methylation/1000G_ONT_WORKFLOW/calcMeth_new.R
+script=1000g_modkit_intersect.sh
+RScript=calcMeth_new.R
 #sample_processed=$1
-WORKING_DIR=/n/users/sgibson/1000g_methylation/modkit_v0.1.11/FIRST_100_MODKIT
+WORKING_DIR=$1
 
 module load R/4.2.3
 
