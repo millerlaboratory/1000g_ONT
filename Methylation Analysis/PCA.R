@@ -6,7 +6,7 @@ library(data.table)
 library(scales)
 library(ggplot2)
 
-cpg.df <- fread("/Volumes/172.23.192.137/users/sgibson/MeOW_files/MeOW-main/results/meow.reference.annotated.tsv")
+cpg.df <- fread("meow.reference.annotated.tsv") #Part of the MeOW output
 
 cpg.avg.table <- cpg.df %>% subset(select=-c(chr, pos, gene)) %>% drop_na() %>% group_by(cpg) %>% summarize_all(mean)
 cpg.avg.table <- data.frame(cpg.avg.table)
@@ -16,9 +16,9 @@ cpg.avg.table <- subset(cpg.avg.table, select=-c(cpg)) %>% drop_na()
 
 #Outlier, need to get the cpg Islands to merge with the control dataset
 
-GM19462_cpg_methyl_indexed <- read_delim("/n/users/sgibson/MeOW_files/MeOW-main/results/GM19462.cpg.methyl.indexed.tsv", delim = "\t", escape_double = FALSE, trim_ws = TRUE)
+GM19462_cpg_methyl_indexed <- read_delim("GM19462.cpg.methyl.indexed.tsv", delim = "\t", escape_double = FALSE, trim_ws = TRUE)
 
-meow_reference_index <- read_delim("/n/users/sgibson/MeOW_files/MeOW-main/results/meow.reference.index.tsv", delim = "\t", escape_double = FALSE, trim_ws = TRUE) %>%
+meow_reference_index <- read_delim("meow.reference.index.tsv", delim = "\t", escape_double = FALSE, trim_ws = TRUE) %>%
   dplyr::rename(index = 0)
 
 meow_index <- meow_reference_index %>%
@@ -42,18 +42,18 @@ bed_file <- bed %>%
   tidyr::drop_na()
 #options(scipen = 999)
 
-write.table(bed_file, "1000g_preprint/methylation/GM19462_cpg_freq.bed", row.names = FALSE, col.names = FALSE, sep = "\t", quote = FALSE)
+write.table(bed_file, "GM19462_cpg_freq.bed", row.names = FALSE, col.names = FALSE, sep = "\t", quote = FALSE)
 
-cpgIslands_sorted_named_core <- read_delim("MeOW_files/MeOW-main/resources/cpgIslands.sorted.named.core.tsv", 
+cpgIslands_sorted_named_core <- read_delim("cpgIslands.sorted.named.core.tsv", 
                                            delim = "\t", escape_double = FALSE, 
                                            trim_ws = TRUE) %>%
   select(chr, start, stop, cpg)
 
 
-write.table(cpgIslands_sorted_named_core, "1000g_preprint/methylation/cpgIslands.bed", row.names = FALSE, col.names = FALSE, sep = "\t", quote = FALSE)
+write.table(cpgIslands_sorted_named_core, "cpgIslands.bed", row.names = FALSE, col.names = FALSE, sep = "\t", quote = FALSE)
 
 
-GM19462_cpg_freq_islands <- read_delim("1000g_preprint/methylation/GM19462_cpg_freq_islands.bed", 
+GM19462_cpg_freq_islands <- read_delim("GM19462_cpg_freq_islands.bed", 
                                        delim = "\t", escape_double = FALSE, 
                                        col_names = FALSE, trim_ws = TRUE) %>%
   select(X4, X8) %>%
@@ -68,7 +68,7 @@ GM19462_cpg_mean <- GM19462_cpg_freq_islands %>%
 
 
 
-cpg_avg_table <- read_csv("/Volumes/172.23.192.137/users/sgibson/1000g_preprint/methylation/cpg.avg.table.csv")
+cpg_avg_table <- read_csv("cpg.avg.table.csv")
 
 
 full_cpg_avg_table <- left_join(cpg_avg_table, GM19462_cpg_mean) %>%
@@ -118,7 +118,7 @@ sample.list <- data.frame("samples"=samples)
 
 sample_check <- data.frame("samples"=samples, "pca" = TRUE)
 
-S1_DEMOGRAPHICS_and_METADATA <- read_csv("/Volumes/172.23.192.137/users/sgibson/1000g_preprint/methylation/S1_DEMOGRAPHICS_and_METADATA.csv") %>%
+S1_DEMOGRAPHICS_and_METADATA <- read_csv("S1_DEMOGRAPHICS_and_METADATA.csv") %>%
   dplyr::rename(samples = `Sample Name`, Superpopulation = `Superpopulation code`) 
 
 
