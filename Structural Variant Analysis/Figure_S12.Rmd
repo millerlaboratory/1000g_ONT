@@ -1,0 +1,36 @@
+---
+title: "Figure_S12"
+output: html_document
+date: "2024-06-29"
+---
+
+```{r}
+library(ggplot2)
+library(tidyr)
+library(GenomicRanges)
+library(karyoploteR)
+```
+
+```{r}
+Figure_S12_data.txt <- read.delim("Figure_S12_data.txt")
+```
+
+```{r}
+OMIM_EXON_SV_COUNT = Figure_S12_data.txt %>% group_by(sv_type, sample_count) %>% summarise(count = n())
+```
+
+
+##Figure_S12.A
+```{r}
+Figure_S12.A = ggplot(OMIM_EXON_SV_COUNT, aes(fill=sv_type, y=count, x=sample_count)) + geom_bar(position = "stack", stat = "identity")
+Figure_S12.A
+```
+
+##Figure_S12.B
+```{r}
+Figure_S12.B_GRanges = toGRanges(Figure_S12_data.txt)
+
+KP = plotKaryotype(genome="hg38")
+Figure_S12.B_KP = kpPlotDensity(KP, data=Figure_S12.B_GRanges)
+```
+

@@ -1,0 +1,24 @@
+---
+title: "Figure_3E"
+output: html_document
+date: "2024-06-29"
+---
+
+```{r}
+library(ggplot2)
+```
+
+```{r}
+Figure_3E_S9_data.txt <- read.delim("Figure_3E_S9_data.txt")
+```
+
+```{r}
+CALLER_AGREE_COUNT = Figure_3E_S9_data.txt %>% group_by(sample_id, supp_vec) %>% summarise(count = n())
+```
+
+```{r}
+Figure_3E = ggplot(CALLER_AGREE_COUNT) + geom_violin(aes(x=supp_vec, y=count)) + 
+  xlim(c("11111", "11110", "11101", "11011", "10111", "01111", "11100", "11001", "10011", "00111", "10101", "01011", "10110", "01110", "01101", "11010", "00011", "00110", "01100", "11000", "01010", "10100", "01001", "10001", "10010", "00101", "00001", "00010", "00100", "01000", "10000")) + 
+  scale_y_log10()
+Figure_3E
+```

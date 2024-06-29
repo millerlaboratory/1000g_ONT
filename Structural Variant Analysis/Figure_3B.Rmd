@@ -1,0 +1,28 @@
+---
+title: "Figure_3B"
+output: html_document
+date: "2024-06-27"
+---
+
+```{r}
+library(ggplot2)
+```
+
+```{r}
+ancestry_colors=c('AFR'='#F1C40F', 'EUR'='#5DADE2', 'SAS'='#9B59B6', 'AMR'='#B01E3A', 'EAS'='#52BE80')
+```
+
+```{r}
+Figure_3B_3C_S7_S8_data.txt <- read.delim("Figure_3B_3C_S7_S8_data.txt")
+```
+
+
+```{r}
+SV_COUNT_DATA_TOTAL = Figure_3B_3C_S7_S8_data.txt %>% group_by(sample_id, caller, ancestry) %>% summarise(count = n())
+```
+
+```{r}
+Figure_3B = ggplot(SV_COUNT_DATA_TOTAL) + geom_violin(aes(x=caller, y=count)) + geom_dotplot(aes(x=caller, y=count, fill=ancestry), binaxis='y', stackdir='center', dotsize = 1.5, binwidth = 100, stroke = 0) + theme(axis.text.x = element_text(angle = 45, hjust=1)) + scale_fill_manual(values = ancestry_colors) + xlim(c("sniffles2_CARD", "hapdiff_CARD", "cutesv_minimap", "sniffles2_minimap", "svim_minimap", "Confident")) + theme_classic()
+Figure_3B
+```
+

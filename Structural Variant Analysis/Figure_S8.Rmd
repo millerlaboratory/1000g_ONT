@@ -1,0 +1,147 @@
+---
+title: "Figure_S8"
+output: html_document
+date: "2024-06-29"
+---
+
+```{r}
+library(GenomicRanges)
+library(karyoploteR)
+library(dplyr)
+```
+
+```{r}
+Figure_3B_3C_S7_S8_data.txt <- read.delim("Figure_3B_3C_S7_S8_data.txt")
+```
+
+```{r}
+cutesv_minimap_INS = subset(Figure_3B_3C_S7_S8_data.txt, sv_type %in% c("INS") & caller %in% c("cutesv_minimap"))
+cutesv_minimap_INS_GRanges = toGRanges(cutesv_minimap_INS)
+
+sniffles2_minimap_INS = subset(Figure_3B_3C_S7_S8_data.txt, sv_type %in% c("INS") & caller %in% c("sniffles2_minimap"))
+sniffles2_minimap_INS_GRanges = toGRanges(sniffles2_minimap_INS)
+
+svim_minimap_INS = subset(Figure_3B_3C_S7_S8_data.txt, sv_type %in% c("INS") & caller %in% c("svim_minimap"))
+svim_minimap_INS_GRanges = toGRanges(svim_minimap_INS)
+
+sniffles2_CARD_INS = subset(Figure_3B_3C_S7_S8_data.txt, sv_type %in% c("INS") & caller %in% c("sniffles2_CARD"))
+sniffles2_CARD_INS_GRanges = toGRanges(sniffles2_CARD_INS)
+
+hapdiff_CARD_INS = subset(Figure_3B_3C_S7_S8_data.txt, sv_type %in% c("INS") & caller %in% c("hapdiff_CARD"))
+hapdiff_CARD_INS_GRanges = toGRanges(hapdiff_CARD_INS)
+
+
+cutesv_minimap_DEL = subset(Figure_3B_3C_S7_S8_data.txt, sv_type %in% c("DEL") & caller %in% c("cutesv_minimap"))
+cutesv_minimap_DEL_GRanges = toGRanges(cutesv_minimap_DEL)
+
+sniffles2_minimap_DEL = subset(Figure_3B_3C_S7_S8_data.txt, sv_type %in% c("DEL") & caller %in% c("sniffles2_minimap"))
+sniffles2_minimap_DEL_GRanges = toGRanges(sniffles2_minimap_DEL)
+
+svim_minimap_DEL = subset(Figure_3B_3C_S7_S8_data.txt, sv_type %in% c("DEL") & caller %in% c("svim_minimap"))
+svim_minimap_DEL_GRanges = toGRanges(svim_minimap_DEL)
+
+sniffles2_CARD_DEL = subset(Figure_3B_3C_S7_S8_data.txt, sv_type %in% c("DEL") & caller %in% c("sniffles2_CARD"))
+sniffles2_CARD_DEL_GRanges = toGRanges(sniffles2_CARD_DEL)
+
+hapdiff_CARD_DEL = subset(Figure_3B_3C_S7_S8_data.txt, sv_type %in% c("DEL") & caller %in% c("hapdiff_CARD"))
+hapdiff_CARD_DEL_GRanges = toGRanges(hapdiff_CARD_DEL)
+
+
+cutesv_minimap_INV = subset(Figure_3B_3C_S7_S8_data.txt, sv_type %in% c("INV") & caller %in% c("cutesv_minimap"))
+cutesv_minimap_INV_GRanges = toGRanges(cutesv_minimap_INV)
+
+sniffles2_minimap_INV = subset(Figure_3B_3C_S7_S8_data.txt, sv_type %in% c("INV") & caller %in% c("sniffles2_minimap"))
+sniffles2_minimap_INV_GRanges = toGRanges(sniffles2_minimap_INV)
+
+svim_minimap_INV = subset(Figure_3B_3C_S7_S8_data.txt, sv_type %in% c("INV") & caller %in% c("svim_minimap"))
+svim_minimap_INV_GRanges = toGRanges(svim_minimap_INV)
+
+sniffles2_CARD_INV = subset(Figure_3B_3C_S7_S8_data.txt, sv_type %in% c("INV") & caller %in% c("sniffles2_CARD"))
+sniffles2_CARD_INV_GRanges = toGRanges(sniffles2_CARD_INV)
+
+hapdiff_CARD_INV = subset(Figure_3B_3C_S7_S8_data.txt, sv_type %in% c("INV") & caller %in% c("hapdiff_CARD"))
+hapdiff_CARD_INV_GRanges = toGRanges(hapdiff_CARD_INV)
+
+
+cutesv_minimap_DUP = subset(Figure_3B_3C_S7_S8_data.txt, sv_type %in% c("DUP") & caller %in% c("cutesv_minimap"))
+cutesv_minimap_DUP_GRanges = toGRanges(cutesv_minimap_DUP)
+
+sniffles2_minimap_DUP = subset(Figure_3B_3C_S7_S8_data.txt, sv_type %in% c("DUP") & caller %in% c("sniffles2_minimap"))
+sniffles2_minimap_DUP_GRanges = toGRanges(sniffles2_minimap_DUP)
+
+svim_minimap_DUP = subset(Figure_3B_3C_S7_S8_data.txt, sv_type %in% c("DUP") & caller %in% c("svim_minimap"))
+svim_minimap_DUP_GRanges = toGRanges(svim_minimap_DUP)
+
+sniffles2_CARD_DUP = subset(Figure_3B_3C_S7_S8_data.txt, sv_type %in% c("DUP") & caller %in% c("sniffles2_CARD"))
+sniffles2_CARD_DUP_GRanges = toGRanges(sniffles2_CARD_DUP)
+
+hapdiff_CARD_DUP = subset(Figure_3B_3C_S7_S8_data.txt, sv_type %in% c("DUP") & caller %in% c("hapdiff_CARD"))
+hapdiff_CARD_DUP_GRanges = toGRanges(hapdiff_CARD_DUP)
+
+```
+
+
+```{r}
+KP = plotKaryotype(plot.type = 2, genome="hg38")
+cutesv_minimap_INS_DEL_KP = kpPlotDensity(KP, data=cutesv_minimap_INS_GRanges, col="yellow", data.panel = 1)
+cutesv_minimap_INS_DEL_KP = kpPlotDensity(KP, data=cutesv_minimap_DEL_GRanges, col="green", data.panel = 2)
+```
+
+```{r}
+KP = plotKaryotype(plot.type = 2, genome="hg38")
+cutesv_minimap_INV_DUP_KP = kpPlotDensity(KP, data=cutesv_minimap_DUP_GRanges, col="orange", data.panel = 1)
+cutesv_minimap_INV_DUP_KP = kpPlotDensity(KP, data=cutesv_minimap_INV_GRanges, col="blue", data.panel = 2)
+```
+
+
+```{r}
+KP = plotKaryotype(plot.type = 2, genome="hg38")
+sniffles2_minimap_INS_DEL_KP = kpPlotDensity(KP, data=sniffles2_minimap_INS_GRanges, col="yellow", data.panel = 1)
+sniffles2_minimap_INS_DEL_KP = kpPlotDensity(KP, data=sniffles2_minimap_DEL_GRanges, col="green", data.panel = 2)
+```
+
+```{r}
+KP = plotKaryotype(plot.type = 2, genome="hg38")
+sniffles2_minimap_INV_DUP_KP = kpPlotDensity(KP, data=sniffles2_minimap_DUP_GRanges, col="orange", data.panel = 1)
+sniffles2_minimap_INV_DUP_KP = kpPlotDensity(KP, data=sniffles2_minimap_INV_GRanges, col="blue", data.panel = 2)
+```
+
+
+```{r}
+KP = plotKaryotype(plot.type = 2, genome="hg38")
+svim_minimap_INS_DEL_KP = kpPlotDensity(KP, data=svim_minimap_INS_GRanges, col="yellow", data.panel = 1)
+svim_minimap_INS_DEL_KP = kpPlotDensity(KP, data=svim_minimap_DEL_GRanges, col="green", data.panel = 2)
+```
+
+```{r}
+KP = plotKaryotype(plot.type = 2, genome="hg38")
+svim_minimap_INV_DUP_KP = kpPlotDensity(KP, data=svim_minimap_DUP_GRanges, col="orange", data.panel = 1)
+svim_minimap_INV_DUP_KP = kpPlotDensity(KP, data=svim_minimap_INV_GRanges, col="blue", data.panel = 2)
+```
+
+
+```{r}
+KP = plotKaryotype(plot.type = 2, genome="hg38")
+sniffles2_CARD_INS_DEL_KP = kpPlotDensity(KP, data=sniffles2_CARD_INS_GRanges, col="yellow", data.panel = 1)
+sniffles2_CARD_INS_DEL_KP = kpPlotDensity(KP, data=sniffles2_CARD_DEL_GRanges, col="green", data.panel = 2)
+```
+
+```{r}
+KP = plotKaryotype(plot.type = 2, genome="hg38")
+sniffles2_CARD_INV_DUP_KP = kpPlotDensity(KP, data=sniffles2_CARD_DUP_GRanges, col="orange", data.panel = 1)
+sniffles2_CARD_INV_DUP_KP = kpPlotDensity(KP, data=sniffles2_CARD_INV_GRanges, col="blue", data.panel = 2)
+```
+
+
+```{r}
+KP = plotKaryotype(plot.type = 2, genome="hg38")
+hapdiff_CARD_INS_DEL_KP = kpPlotDensity(KP, data=hapdiff_CARD_INS_GRanges, col="yellow", data.panel = 1)
+hapdiff_CARD_INS_DEL_KP = kpPlotDensity(KP, data=hapdiff_CARD_DEL_GRanges, col="green", data.panel = 2)
+```
+
+```{r}
+KP = plotKaryotype(plot.type = 2, genome="hg38")
+hapdiff_CARD_INV_DUP_KP = kpPlotDensity(KP, data=hapdiff_CARD_DUP_GRanges, col="orange", data.panel = 1)
+hapdiff_CARD_INV_DUP_KP = kpPlotDensity(KP, data=hapdiff_CARD_INV_GRanges, col="blue", data.panel = 2)
+```
+

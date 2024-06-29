@@ -1,0 +1,34 @@
+---
+title: "Figure_S7"
+output: html_document
+date: "2024-06-28"
+---
+
+```{r}
+library(ggplot2)
+library(rlang)
+library(dplyr)
+```
+
+```{r}
+Figure_3B_3C_S7_S8_data.txt <- read.delim("Figure_3B_3C_S7_S8_data.txt")
+```
+
+```{r}
+SV_COUNT_DATA_BY_CHROM = Figure_3B_3C_S7_S8_data.txt %>% group_by(chr, sv_type, sample_id, caller) %>% summarise(count = n())
+```
+
+```{r}
+CALLER <- c("sniffles2_CARD", "hapdiff_CARD", "cutesv_minimap", "sniffles2_minimap", "svim_minimap", "Confident")
+
+for (caller in CALLER) {
+  subset_data <- SV_COUNT_DATA_BY_CHROM %>%
+      filter(caller == !!caller)
+
+Figure_S7 = ggplot(subset(subset_data, sv_type %in% c("DEL", "INS")), aes(x=chr, y=count, fill=sv_type)) + geom_dotplot(binaxis='y', stackdir='center', dotsize = 10, binwidth = 1, stroke = 0, stackratio = 0.2) + xlim(c("chr1", "chr2", "chr3", "chr4", "chr5", "chr6", "chr7", "chr8", "chr9", "chr10", "chr11", "chr12", "chr13", "chr14", "chr15", "chr16", "chr17", "chr18", "chr19", "chr20", "chr21", "chrX", "chrY")) + theme_classic() + theme(text = element_text(size = 10, family = "Helvetica"), axis.text.x = element_text(angle = 45, hjust =1)) + labs(title="Number of INS and DEL, per chromosome, per individual") + ylim(0,1500)
+                   
+print(Figure_S7)
+
+}
+```
+

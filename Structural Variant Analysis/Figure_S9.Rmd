@@ -1,0 +1,104 @@
+---
+title: "Figure_S9"
+output: html_document
+date: "2024-06-29"
+---
+
+
+```{r}
+library(ggplot2)
+library(tidyr)
+```
+
+```{r}
+Figure_3E_S9_data.txt <- read.delim("Figure_3E_S9_data.txt")
+```
+
+```{r}
+# Column 3 is the sample_id (sample name, sex, and ancestry) - use this command to separate that info out
+Figure_3E_S9_data.txt <- Figure_3E_S9_data.txt %>%
+  separate(sample_id, into = c("sample_name", "sample_sex", "sample_superpop", "sample_subpop"), sep = "_")
+```
+
+```{r}
+CALLER_AGREE_COUNT_TYPE_ANC = Figure_3E_S9_data.txt %>% group_by(sample_name, sample_superpop, sv_type, supp_vec) %>% summarise(count = n())
+```
+
+#Figure_S9.A 
+```{r}
+all_callers_INS_DEL = subset(CALLER_AGREE_COUNT_TYPE_ANC, supp_vec %in% c("11111") & sv_type %in% c("INS", "DEL"))
+
+Figure_S9.A = ggplot(all_callers_INS_DEL)+ geom_violin(aes(x=sample_superpop, y=count)) + geom_dotplot(aes(x=sample_superpop, y=count, fill=sv_type), binaxis='y', stackdir='center', dotsize = 1.5, binwidth = 100, stroke = 0) + xlim(c("AFR", "AMR", "EAS", "EUR", "SAS"))
+Figure_S9.A
+
+```
+
+#Figure_S9.C
+```{r}
+hapdiff_only_INS_DEL = subset(CALLER_AGREE_COUNT_TYPE_ANC, supp_vec %in% c("10000") & sv_type %in% c("INS", "DEL"))
+
+Figure_S9.C = ggplot(hapdiff_only_INS_DEL)+ geom_violin(aes(x=sample_superpop, y=count)) + geom_dotplot(aes(x=sample_superpop, y=count, fill=sv_type), binaxis='y', stackdir='center', dotsize = 5, binwidth = 10, stroke = 0) + xlim(c("AFR", "AMR", "EAS", "EUR", "SAS"))
+Figure_S9.C
+```
+
+
+#Figure_S9.B
+```{r}
+
+Figure_3E_S9_data.txt <- Figure_3E_S9_data.txt %>%
+  mutate(ge1 = ifelse(supp_vec %in% c("11111", "11110", "11101", "11011", "10111", "01111", "11100", "11001", "10011", "00111", "10101", "01011", "10110", "01110", "01101", "11010", "00011", "00110", "01100", "11000", "01010", "10100", "01001", "10001", "10010", "00101", "00001", "00010", "00100", "01000", "10000"), "yes", "no"))
+
+Figure_3E_S9_data.txt <- Figure_3E_S9_data.txt %>%
+  mutate(ge2 = ifelse(supp_vec %in% c("11111", "11110", "11101", "11011", "10111", "01111", "11100", "11001", "10011", "00111", "10101", "01011", "10110", "01110", "01101", "11010", "00011", "00110", "01100", "11000", "01010", "10100", "01001", "10001", "10010", "00101"), "yes", "no"))
+
+Figure_3E_S9_data.txt <- Figure_3E_S9_data.txt %>%
+  mutate(ge3 = ifelse(supp_vec %in% c("11111", "11110", "11101", "11011", "10111", "01111", "11100", "11001", "10011", "00111", "10101", "01011", "10110", "01110", "01101", "11010"), "yes", "no"))
+
+Figure_3E_S9_data.txt <- Figure_3E_S9_data.txt %>%
+  mutate(ge4 = ifelse(supp_vec %in% c("11111", "11110", "11101", "11011", "10111", "01111"), "yes", "no"))
+
+Figure_3E_S9_data.txt <- Figure_3E_S9_data.txt %>%
+  mutate(ge5 = ifelse(supp_vec %in% c("11111"), "yes", "no"))
+
+
+GE1_COUNT = Figure_3E_S9_data.txt %>% group_by(sample_name, sample_superpop, ge1) %>% summarise(count = n())
+GE1_COUNT_yes = subset(GE1_COUNT, ge1 %in% c("yes"))
+GE1_COUNT_yes$ge1 <- ifelse(GE1_COUNT_yes$ge1 == "yes", "ge1", GE1_COUNT_yes$ge1)
+names(GE1_COUNT_yes)[names(GE1_COUNT_yes) == "ge1"] <- "ge"
+
+GE2_COUNT = Figure_3E_S9_data.txt %>% group_by(sample_name, sample_superpop, ge2) %>% summarise(count = n())
+GE2_COUNT_yes = subset(GE2_COUNT, ge2 %in% c("yes"))
+GE2_COUNT_yes$ge2 <- ifelse(GE2_COUNT_yes$ge2 == "yes", "ge2", GE2_COUNT_yes$ge2)
+names(GE2_COUNT_yes)[names(GE2_COUNT_yes) == "ge2"] <- "ge"
+
+GE3_COUNT = Figure_3E_S9_data.txt %>% group_by(sample_name, sample_superpop, ge3) %>% summarise(count = n())
+GE3_COUNT_yes = subset(GE3_COUNT, ge3 %in% c("yes"))
+GE3_COUNT_yes$ge3 <- ifelse(GE3_COUNT_yes$ge3 == "yes", "ge3", GE3_COUNT_yes$ge3)
+names(GE3_COUNT_yes)[names(GE3_COUNT_yes) == "ge3"] <- "ge"
+
+GE4_COUNT = Figure_3E_S9_data.txt %>% group_by(sample_name, sample_superpop, ge4) %>% summarise(count = n())
+GE4_COUNT_yes = subset(GE4_COUNT, ge4 %in% c("yes"))
+GE4_COUNT_yes$ge4 <- ifelse(GE4_COUNT_yes$ge4 == "yes", "ge4", GE4_COUNT_yes$ge4)
+names(GE4_COUNT_yes)[names(GE4_COUNT_yes) == "ge4"] <- "ge"
+
+GE5_COUNT = Figure_3E_S9_data.txt %>% group_by(sample_name, sample_superpop, ge5) %>% summarise(count = n())
+GE5_COUNT_yes = subset(GE5_COUNT, ge5 %in% c("yes"))
+GE5_COUNT_yes$ge5 <- ifelse(GE5_COUNT_yes$ge5 == "yes", "ge5", GE5_COUNT_yes$ge5)
+names(GE5_COUNT_yes)[names(GE5_COUNT_yes) == "ge5"] <- "ge"
+
+GE_COUNT_COMBINED <- bind_rows(GE1_COUNT_yes, GE2_COUNT_yes, GE3_COUNT_yes, GE4_COUNT_yes, GE5_COUNT_yes)
+
+```
+
+```{r}
+ancestry_colors=c('AFR'='#F1C40F', 'EUR'='#5DADE2', 'SAS'='#9B59B6', 'AMR'='#B01E3A', 'EAS'='#52BE80')
+
+Figure_S9.B = ggplot(GE_COUNT_COMBINED)+ geom_violin(aes(x=ge, y=count)) + geom_dotplot(aes(x=ge, y=count, fill=sample_superpop), binaxis='y', stackdir='center', dotsize = 4, binwidth = 100, stroke = 0) + xlim(c("ge1", "ge2", "ge3", "ge4", "ge5")) + scale_fill_manual(values = ancestry_colors)
+Figure_S9.B
+```
+
+
+
+
+
+

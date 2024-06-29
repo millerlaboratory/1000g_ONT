@@ -1,0 +1,34 @@
+---
+title: "Figure_3C"
+output: html_document
+date: "2024-06-28"
+---
+
+```{r}
+library(ggplot2)
+library(rlang)
+library(dplyr)
+```
+
+```{r}
+Figure_3B_3C_S7_S8_data.txt <- read.delim("Figure_3B_3C_S7_S8_data.txt")
+```
+
+
+```{r}
+TYPE <- c("INS", "DEL")
+CALLER <- c("sniffles2_CARD")
+
+for (type in TYPE) {
+  for (caller in CALLER) {
+    subset_data <- Figure_3B_3C_S7_S8_data.txt %>%
+      filter(type == !!type, caller == !!caller)
+    
+    Figure_3C = ggplot(data = subset_data, aes(x = as.numeric(sv_length))) + geom_histogram() + xlim(0,1000)
+    
+#for each of these xlims for DEL- xlim(-1000,0), xlim(-10000,0)
+#for each of these xlims for INS - xlim(0,1000), xlim(1000,10000)
+  }
+}
+```
+

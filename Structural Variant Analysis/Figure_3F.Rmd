@@ -1,0 +1,25 @@
+---
+title: "Figure_3F"
+output: html_document
+date: "2024-06-29"
+---
+
+```{r}
+library(ggplot2)
+library(tidyr)
+```
+
+```{r}
+Figure_3F_data_txt <- read.delim("Figure_3F_data_txt")
+```
+
+```{r}
+EXACTLY_2_SAMPLES_COUNT = Figure_3F_data_txt %>% group_by(sv_type, ancestry) %>% summarise(count = n())
+```
+
+```{r}
+Figure_3F = ggplot(EXACTLY_2_SAMPLES_COUNT, aes(fill=sv_type, y=count, x=ancestry)) + geom_bar(position = "stack", stat = "identity") +  coord_flip() + xlim("EUR_SAS", "EAS_SAS", "EAS_EUR", "AMR_SAS", "AMR_EUR", "AMR_EAS", "AFR_SAS", "AFR_EUR", "AFR_EAS", "AFR_AMR", "SAS_SAS", "EUR_EUR", "EAS_EAS", "AMR_AMR", "AFR_AFR")
+
+Figure_3F
+```
+

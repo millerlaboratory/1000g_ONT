@@ -1,0 +1,28 @@
+---
+title: "Figure_3D"
+output: html_document
+date: "2024-06-29"
+---
+
+```{r}
+library(ggplot2)
+```
+
+```{r}
+Figure_3D_data.txt <- read.delim("Figure_3D_data.txt")
+```
+
+```{r}
+FIGURE_3D_INS_DEL = ggplot(subset(Figure_3D_data.txt, SVTYPE %in% c("INS", "DEL")), aes(fill=SVTYPE, y=Count, x=File)) + 
+  geom_bar(position = "stack", stat = "identity") + 
+  geom_vline(xintercept = 67.5)
+FIGURE_3D_INS_DEL
+```
+
+
+```{r}
+FIGURE_3D_INV_DUP = ggplot(subset(Figure_3D_data.txt, SVTYPE %in% c("DUP", "INV")), aes(fill=SVTYPE, y=Count, x=File)) + 
+  geom_bar(position = "stack", stat = "identity") 
+  geom_vline(xintercept = 67.5)
+FIGURE_3D_INV_DUP
+```
