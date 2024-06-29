@@ -2,8 +2,7 @@ These are scripts for performing the tandem repeat analysis
 
 **Part One Assembling the bed file for geneotyping**
 
-See the shell script  for how the loci genotyped were selected, the original motif set can be found here: https://zenodo.org/records/835736
-The file is also included.
+See the shell script  for how the loci genotyped were selected, the original motif set can be found here: https://zenodo.org/records/835736. Motifs for chrX:67545317-67545419 were manually edited to account for amino acid codons for the enitre region, not just the repeat.
 
 
 **Part Two: Run Vamos**
