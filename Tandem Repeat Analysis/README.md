@@ -7,7 +7,7 @@ See the shell script  for how the loci genotyped were selected, the original mot
 
 **Part Two: Run Vamos**
 
-Make sure vamos is installed:
+Make sure vamos is installed: https://github.com/ChaissonLab/vamos
 
 The conditions vamos was run is in the shell script **vamos_original.sh**. A for-loop iterates through the hapdiff assembly files generated from the Napu pipeline (https://github.com/nanoporegenomics/napu_wf).
 
